@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8" />
+  <title>生日引导动画 - 蛋糕点蜡烛互动</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: scroll;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    #intro-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-image: url('images/bgc03.jpg');
+      /* 改成你的图片文件路径 */
+      background-repeat: no-repeat;
+      /* 不重复平铺 */
+      background-size: cover;
+      /* 自动缩放图片铺满整个背景 */
+      background-position: center center;
+      /* 图片居中显示 */
+      z-index: 10;
+    }
+
+    /* 蛋糕容器 */
+    #cake-container {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      background: none;
+    }
+
+    .cake-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      z-index: 0;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+
+    /* 蜡烛 */
+    .candle {
+      position: absolute;
+      bottom: 208px;
+      width: 14px;
+      height: 60px;
+      background: #ffe066;
+      border-radius: 3px;
+      left: 50%;
+      margin-left: -7px;
+      z-index: 1;
+    }
+
+    /* 火焰 */
+    .flame {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      width: 14px;
+      height: 25px;
+      margin-left: -7px;
+      background: radial-gradient(circle at center, #fffa9c 40%, #ff5500 90%);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      filter: drop-shadow(0 0 5px #ff8800);
+      animation: flicker 1.5s infinite ease-in-out;
+      transform-origin: center bottom;
+    }
+
+    /* 火焰闪烁动画 */
+    @keyframes flicker {
+
+      0%,
+      100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.1) translateY(-3px);
+        opacity: 0.8;
+      }
+    }
+
+    /* 火焰熄灭 */
+    .flame.extinguished {
+      animation: extinguish 1.5s forwards;
+    }
+
+    @keyframes extinguish {
+      0% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(0) translateY(-10px);
+      }
+    }
+
+    /* 文字 */
+    #wish-text,
+    #blow-btn {
+      margin-top: 30px;
+      opacity: 0;
+      transition: opacity 1s ease;
+      user-select: none;
+
+    }
+
+    #wish-text.show,
+    #blow-btn.show {
+      opacity: 1;
+      size: 30px;
+    }
+
+    #blow-btn {
+      padding: 10px 30px;
+      background: #fff;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    /* 倒计时 */
+    #countdown {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 1.4rem;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-weight: bold;
+      user-select: none;
+      display: block;
+      /* 默认显示 */
+    }
+
+    #cake-message {
+      position: absolute;
+      bottom: 710px;
+      /* 蛋糕容器高度250px，上方20px */
+      font-weight: bold;
+      font-size: 3rem;
+      color: #9b805a;
+      text-shadow: 0 0 5px #f5f3db;
+      user-select: none;
+      pointer-events: none;
+      width: 100%;
+      text-align: center;
+      left: 0;
+      z-index: 5;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="intro-container">
+    <!-- <div id="cake-message">萌妞生日快乐</div> -->
+    <div id="cake-container">
+      <img class="cake-img" src="./images/qsxiong06.png?v=4" alt="蛋糕" />
+      <div class="candle">
+        <div class="flame" id="flame"></div>
+      </div>
+    </div>
+
+    <div id="wish-text">许下你的心愿</div>
+    <button id="blow-btn">吹灭蜡烛</button>
+    <div id="countdown">20</div>
+  </div>
+
+  <script>
+    const flame = document.getElementById('flame');
+    const wishText = document.getElementById('wish-text');
+    const blowBtn = document.getElementById('blow-btn');
+    const countdown = document.getElementById('countdown');
+
+    function delay(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function startSequence() {
+      // 倒计时从一开始就显示并倒数
+      let timeLeft = 20;
+      countdown.textContent = timeLeft;
+      countdown.style.display = 'block';
+
+      const timer = setInterval(() => {
+        timeLeft--;
+        countdown.textContent = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          blowOut();
+        }
+      }, 1000);
+
+      // 直接显示“许下你的心愿”
+      wishText.classList.add('show');
+
+      // 3 秒后显示“吹灭蜡烛”按钮（可选）
+      await delay(3000);
+      blowBtn.classList.add('show');
+
+      // 点击按钮熄灭蜡烛
+      blowBtn.onclick = () => {
+        clearInterval(timer);
+        blowOut();
+      };
+    }
+
+
+
+    function blowOut() {
+      flame.classList.add('extinguished');
+      blowBtn.style.display = 'none';
+      wishText.style.display = 'none';
+      countdown.style.display = 'none';
+
+      // 等待熄灭动画结束后跳转（动画时长1.5秒）
+      setTimeout(() => {
+        window.location.href = 'guide.html';
+      }, 1500);
+    }
+
+
+    startSequence();
+  </script>
+
+</body>
+
+</html>
