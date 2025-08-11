@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8" />
+  <title>轻松熊导览页面</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+      background: url('images/qsxiongbackground03.jpg') no-repeat center center / cover;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 50px;
+      color: #5A3E36;
+      text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
+    }
+
+    .modules {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    .module {
+      background: rgba(255 255 255 / 0.85);
+      border-radius: 20px;
+      box-shadow: 0 8px 15px rgb(90 62 54 / 0.3);
+      padding: 40px 30px;
+      flex: 1 1 200px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      color: #5A3E36;
+      font-weight: bold;
+      font-size: 1.4rem;
+      user-select: none;
+      z-index: 1;
+      position: relative;
+    }
+
+    .module:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 14px 25px rgb(90 62 54 / 0.5);
+    }
+
+    /* 渐变覆盖层 */
+    #fade-overlay {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      z-index: 9999;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>碳灰成长日记</h1>
+
+  <div class="modules">
+    <div class="module" onclick="fadeToPage('swiper.html')">怎么长这么大了！</div>
+    <div class="module" onclick="fadeToPage('cake.html')">礼物不在这里</div>
+  </div>
+
+  <!-- 渐变遮罩 -->
+  <div id="fade-overlay"></div>
+
+  <script>
+    function fadeToPage(page) {
+      const overlay = document.getElementById('fade-overlay');
+      overlay.style.pointerEvents = 'auto'; // 开启遮罩事件，防止多次点击
+      overlay.style.opacity = '1'; // 开始变暗
+
+      // 0.8秒后跳转
+      setTimeout(() => {
+        location.href = page;
+      }, 800);
+    }
+  </script>
+
+</body>
+
+</html>

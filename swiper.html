@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8" />
+  <title>生日轮播图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #000;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .swiper {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .swiper-slide {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #222;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slide-text {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      width: 100%;
+      padding: 10px 15px;
+      box-sizing: border-box;
+      text-align: center;
+      color: #fff;
+    }
+
+    .slide-text h2 {
+      margin: 0 0 6px 0;
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+
+    .slide-text p {
+      margin: 0;
+      font-size: 1rem;
+      color: #fff;
+    }
+
+    .swiper-pagination-bullet {
+      background: rgba(255, 255, 255, 0.7);
+      opacity: 1;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: #ff4081;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <img src="./images/xiaoshihou.jpg" alt="生日快乐" />
+        <div class="slide-text">
+          <h2>碳灰小时候</h2>
+          <p>萌鸭出生~</p>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="./images/xaioshihou2.jpg" alt="生日快乐" />
+        <div class="slide-text">
+          <h2>碳灰小时候2</h2>
+          <p>继续释出萌鸭照~</p>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="./images/nichousha.jpg" alt="生日快乐" />
+        <div class="slide-text">
+          <h2>碳灰小时候3</h2>
+          <p>你瞅啥~</p>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="./images/xiaoxueji.jpg" alt="回忆" />
+        <div class="slide-text">
+          <h2>碳灰小学鸡时候</h2>
+          <p>哎呀哎呀小不点</p>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="./images/dashihou.jpg" alt="回忆" />
+        <div class="slide-text">
+          <h2>碳灰大时候</h2>
+          <p>实话小婴儿</p>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="./images/zhushihou.jpg" alt="未来" />
+        <div class="slide-text">
+          <h2>碳灰猪时候</h2>
+          <p>有猪啊！！！</p>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="./images/daerdong.jpg" alt="回忆" />
+        <div class="slide-text">
+          <h2>碳灰打耳洞时候</h2>
+          <p>和谁一起打的啊👂</p>
+        </div>
+      </div>
+
+      <div class="swiper-slide">
+        <img src="./images/mean.jpg" alt="回忆" />
+        <div class="slide-text">
+          <h2>碳灰mean时候</h2>
+          <p>is not professional💅💅💅</p>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="./images/chimain01.jpg" alt="未来" />
+        <div class="slide-text">
+          <h2>碳灰嗦面时候1</h2>
+          <p>鸭米鸭米</p>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="./images/chimian02.jpg" alt="未来" />
+        <div class="slide-text">
+          <h2>碳灰吃面时候02</h2>
+          <p>吸溜吸溜</p>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="./images/liuhai.jpg" alt="回忆" />
+        <div class="slide-text">
+          <h2>碳灰有刘海时候</h2>
+          <p>季节限定--抹茶蛋挞刘海鸭</p>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="./images/henchangyitiao.jpg" alt="回忆" />
+        <div class="slide-text">
+          <h2>碳灰很长一条时候</h2>
+          <p>像超市门口很长那个气球嘿嘿</p>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="./images/xiaogou.jpg" alt="回忆" />
+        <div class="slide-text">
+          <h2>碳灰小狗时候</h2>
+          <p>嘬嘬嘬</p>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="./images/crying.jpg" alt="回忆" />
+        <div class="slide-text">
+          <h2>碳灰哭时候</h2>
+          <p>显现出鸭型</p>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="./images/smile.jpg" alt="回忆" />
+        <div class="slide-text">
+          <h2>碳灰笑时候</h2>
+          <p>哎呀哎呀哪来的捏捏</p>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="./images/bizhongzhi.jpg" alt="回忆" />
+        <div class="slide-text">
+          <h2>碳灰偷偷比中指时候</h2>
+          <p>原来私底下这么狠</p>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="./images/hushi.jpg" alt="回忆" />
+        <div class="slide-text">
+          <h2>碳灰护食时候</h2>
+          <p>什么东西这么好吃</p>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="./images/END.jpg" alt="回忆" />
+        <div class="slide-text">
+          <h2>没有啦~</h2>
+          <p>碳小灰日记持续更新中...</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    new Swiper(".mySwiper", {
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  </script>
+
+</body>
+
+</html>
